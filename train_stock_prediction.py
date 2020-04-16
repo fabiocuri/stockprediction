@@ -226,7 +226,6 @@ if '__main__' == __name__:
     LOOKUP_STEP = 30
     TEST_SIZE = 0.2
     FEATURE_COLUMNS = ['Open', 'High', 'Low', 'Close', 'Volume']
-    date_now = time.strftime("%Y-%m-%d")
     DATA_TRAIN = preprocess_data(df, n_steps=N_STEPS, lookup_step=LOOKUP_STEP, test_size=TEST_SIZE, 
                                  feature_columns=FEATURE_COLUMNS)
     DATA_EVALUATE = preprocess_data(df, n_steps=N_STEPS, lookup_step=LOOKUP_STEP, test_size=TEST_SIZE, 
@@ -239,12 +238,14 @@ if '__main__' == __name__:
 
     for i in range(30):
 
+        date_now = time.strftime("%Y-%m-%d")
+
         N_LAYERS = random.choice([2, 3, 4])
         UNITS = random.choice([128, 256])
-        LEARNING_RATE = float("{:.3f}".format(np.random.random_sample()*0.1))
+        LEARNING_RATE = np.power(10,(-4 * np.random.rand()))
         BATCH_SIZE = random.choice([32, 64, 128])
-        
-        model_name = f"{TICKER}_{date_now}-seq-{N_STEPS}-step-{LOOKUP_STEP}-layers-{N_LAYERS}-units-{UNITS}-lr-{LEARNING_RATE}-batch-{BATCH_SIZE}"
+
+        model_name = '{}-{}-seq-{}-step-{}-layers-{}-units-{}-lr-{}-batch-{}'.format(TICKER,date_now,N_STEPS,LOOKUP_STEP,N_LAYERS,UNITS,LEARNING_RATE,BATCH_SIZE)
         
         if model_name not in lookback:
             lookback.append(model_name)
@@ -261,12 +262,11 @@ if '__main__' == __name__:
                 #clear_output(wait=True)
                 print('Best MAE: ' + str(MAE_best))
 
-            time.sleep(10)
-
     best_model.save(os.path.join("./results/LSTM_best_model.h5"))
 
-    # predict the future price
+    # Predict future price
     #future_price = predict(best_model, DATA_EVALUATE)
     #print(f"Future price after {LOOKUP_STEP} days is {future_price:.2f}")
-    #print("Accuracy Score:", get_accuracy(model, DATA_EVALUATE))
-    #plot_graph(best_model, DATA_EVALUATE)
+
+    # Plot test predictions
+    plot_graph(best_model, DATA_EVALUATE)
