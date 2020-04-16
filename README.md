@@ -1,5 +1,8 @@
 # Stock prediction
 
+This project retrieves stock prices automatically through an API and fits a LSTM model to predict future prices .
+The entire pipeline will be incorporated in Apache Airflow.
+
 1. Install dependencies 
 pip install -r requirements.txt
 
