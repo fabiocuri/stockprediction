@@ -1,0 +1,11 @@
+python3 train_stock_prediction.py --ticker AMZN --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker VIX --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker AAPL --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker AAL --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker KRMD --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker DRD --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker AVDL --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker HEBT --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker ELA --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker APTO --api_alpha_vantage NGO8VM68OP19IAOL
+python3 train_stock_prediction.py --ticker APLT --api_alpha_vantage NGO8VM68OP19IAOL
