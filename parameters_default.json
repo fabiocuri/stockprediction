@@ -1,0 +1,11 @@
+{"firebase_path": "stockproject-e5f62",
+"firebase_key": "AIzaSyDT2X9gha7cVneESW8GrVVQ_Gc2qZ81dyg",
+"alphavantage_key": "ULT8II6ARFY7NUMG",
+"features": "",
+"years": 3,
+"period": 5,
+"tuning_day": 6,
+"length_backtesting": 1,
+"steps": 10,
+"training": 0.9,
+"num_exps": 1}
