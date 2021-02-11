@@ -1,8 +1,11 @@
 def export_firebase(data, stock, db, folder):
-    ''' Exports data to Google Firebase '''
-
+    """
+    Exports data to Google Firebase
+    """
+    
     db.child(folder).child(stock).remove()
     db.child(folder).child(stock).push(data)
+
 
 def retrieve_params_firebase(stock, db, index):
     ''' Retrieves hyper-parameters from Google Firebase for a stock already tuned '''

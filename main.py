@@ -4,11 +4,14 @@ from get_data import *
 from models import *
 from firebase_actions import *
 from test import *
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 if '__main__' == __name__:
-
+    
     # Configuration
-    stock, index, params_f = str(sys.argv[1]), str(sys.argv[2]), str(sys.argv[3])
+    stock, index, params_f = str(sys.argv[1]), str(
+        sys.argv[2]), str(sys.argv[3])
 
     with open(params_f) as f:
         parameters = json.load(f)
@@ -22,19 +25,20 @@ if '__main__' == __name__:
 
     firebase_app_ = pyrebase.initialize_app(config)
     db = firebase_app_.database()
-    
+
     index = index.split("'")[1].split("<")
 
     # Get stock data
-    stock_data = test_output(get_historical_data, stock, years, period, features, alphavantage_key)
+    stock_data = get_historical_data(stock=stock, years=years)
 
+    # Missing values imputation
+    stock_data = impute_missing_values(stock_data=stock_data)
+    
     # Hyper-parameter tuning
-    if dt.datetime.today().weekday() in [tuning_day, tuning_day+1]:
-        test_only(hyperparameter_tuning, stock, stock_data, length_backtesting, features, steps, training, period, years, num_exps, db, index)
+    hyperparameter_tuning(stock=stock, stock_data=stock_data, years=years,
+                          length_backtesting=length_backtesting, steps=steps, training=training, db=db, index=index)
 
     # Train current day model and perform predictions
-    if tuning_day == -1:
-        params = []
-    else:
-        params = test_output(retrieve_params_firebase, stock, db, index)
-    test_only(predict_tomorrow, stock, stock_data, num_exps, steps, training, db, params, index)
+    params = retrieve_params_firebase(stock=stock, db=db, index=index)
+    predict_tomorrow(stock=stock, stock_data=stock_data, steps=steps,
+                     training=training, db=db, index=index, params=params)

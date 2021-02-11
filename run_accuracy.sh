@@ -1,4 +1,4 @@
-#!/usr/bin/env bash   
+#!/usr/bin/env bash
 FOLDER="/home/fabio/Desktop/stocker-master"
-PARAMETERS="$FOLDER/parameters_default.json" 
-python3 $FOLDER/accuracy.py $PARAMETERS  
+PARAMETERS="$FOLDER/parameters_default.json"
+python3 $FOLDER/accuracy.py $PARAMETERS
